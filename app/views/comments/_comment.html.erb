@@ -1,0 +1,34 @@
+ <div class="modal-dialog"  style: "padding-top: 10px;">
+    <div class="modal-content">
+      <div class="modal-header">
+      	 <h3 class="modal-title"></h3>
+      	 
+        <button type="button" class="close" 
+                data-dismiss="modal" 
+                aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+      </div>
+      
+      <div class="modal-body">
+      	<h5>Comments</h5>
+      	 <ul class="list-group">
+      	 	<% @post.comments.each do |comment|%>
+      	 	 <li class="list-group-item d-flex justify-content-between align-items-center">
+               <span><h5><i class="glyphicon glyphicon-user">&nbsp;<%= comment.user.name.capitalize%></i></h5></span>
+               <div><%= comment.comment%></div>
+             </li>
+      	 	<%end%>
+         </ul> 
+ 
+      </div>
+      <div class="modal-footer">
+      </div>
+	</div>
+	</div>
+
+<style>
+.lbl {
+	font-weight: bold;
+	padding: 10px 0px 0px 12px;
+}
+</style>

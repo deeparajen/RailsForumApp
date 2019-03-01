@@ -1,0 +1,2 @@
+$('#comment_post_count_'+'<%=@post.id%>').html('<i class="glyphicon glyphicon-comment"></i>&nbsp;<%= pluralize(@post.comments.size, 'comments')%>');
+$('#comment_<%=@post.id%>').val('').blur();

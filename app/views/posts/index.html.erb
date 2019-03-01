@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<div ><%= link_to "+ New post", new_post_path, class: "btn btn-large btn-success pull-right" %></div>
+<div style="clear:both">&nbsp;</div>
+<% @posts.each do |post| %>
+  <div class="well well-lg">
+     <h4 class="name"><i class="glyphicon glyphicon-user">&nbsp;<%= post.user.name.capitalize %></i></h4>
+     <div class="content">
+       <span class="text"><%= truncate(post.content, length: 350) %></span>
+     </div>
+     <br/>
+     
+     <div class="btn-group">
+    	posted <%= time_ago_in_words(post.created_at) %> ago.
+    </div>
+    <div class="pull-right">
+     <span id="likes_post_count_<%=post.id%>" class="label label-default"><%= pluralize(post.get_upvotes.size, 'like') %></span>
+     <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-thumbs-up') + ' Like it',
+               like_post_path(post), class: 'btn btn-default btn-sm', remote: :true,method: :put %>
+     <span class="label label-default" id="comment_post_count_<%=post.id%>">
+     	<i class="glyphicon glyphicon-comment"></i>&nbsp;
+     	<%= pluralize(post.comments.size, 'comments') %></span>
+     	<span><%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-comment') + ' View Comments', post_comments_path(post), :class => "btn btn-default btn-sm",  "data-target" => "#myModal_post",:remote => true %>
+     	</span>
+     </div>
+
+    <br/>
+    <br/>
+    	  <div class="modal fade" id="myModal_post" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" >
+        </div> <!-- model ending -->
+
+    	<div class="comment-form">
+             <%= render partial: 'comments/form', locals: { post: post } %>
+       </div>
+    
+       
+        
+	 </div>
+	 
+ 
+<% end %>
+<%= paginate @posts %>
